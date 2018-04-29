@@ -8,7 +8,7 @@ before_install:
   - tar xzf scipoptsuite-5.0.1.tgz
   - cd scipoptsuite-5.0.1
   - mkdir build && cd build
-  - CC=clang && CXX=clang++ && cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release ..
+  - CC=clang CXX=clang++ cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release ..
   - make
   - make install
   - popd
@@ -27,19 +27,19 @@ matrix:
     python: pypy3
   - os: osx
     osx_image: xcode9.3
-#    language: generic
-#    before_install:
-#      - pushd .
-#      - curl --referer 'http://scip.zib.de/download.php?fname=scipoptsuite-5.0.1.tgz' 'http://scip.zib.de/download/release/scipoptsuite-5.0.1.tgz' --output 'scipoptsuite-5.0.1.tgz'
-#      - tar xzf scipoptsuite-5.0.1.tgz
-#      - cd scipoptsuite-5.0.1
-#      - mkdir build && cd build
-#      - cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release ..
-#      - make
-#      - make install
-#      - popd
-#      - brew update
-#      - brew upgrade python3
-#      - virtualenv env -p python3
-#      - source env/bin/activate
-#      - pip install -r requirements.txt
+    language: generic
+    before_install:
+      - pushd .
+      - curl --referer 'http://scip.zib.de/download.php?fname=scipoptsuite-5.0.1.tgz' 'http://scip.zib.de/download/release/scipoptsuite-5.0.1.tgz' --output 'scipoptsuite-5.0.1.tgz'
+      - tar xzf scipoptsuite-5.0.1.tgz
+      - cd scipoptsuite-5.0.1
+      - mkdir build && cd build
+      - cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release ..
+      - make
+      - make install
+      - popd
+      - brew update
+      - brew upgrade python3
+      - virtualenv env -p python3
+      - source env/bin/activate
+      - pip install -r requirements.txt
