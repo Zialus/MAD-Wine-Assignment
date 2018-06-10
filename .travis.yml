@@ -3,19 +3,14 @@ dist: xenial
 sudo: true
 
 before_install:
-  - pushd .
-  - curl --referer 'http://scip.zib.de/download.php?fname=scipoptsuite-5.0.1.tgz' 'http://scip.zib.de/download/release/scipoptsuite-5.0.1.tgz' --output 'scipoptsuite-5.0.1.tgz'
-  - tar xzf scipoptsuite-5.0.1.tgz
-  - cd scipoptsuite-5.0.1
-  - mkdir build && cd build
-  - CC=clang CXX=clang++ cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release ..
-  - make
-  - sudo make install
-  - popd
+  - curl --referer 'http://scip.zib.de/download.php?fname=SCIPOptSuite-5.0.1-Linux.deb' 'http://scip.zib.de/download/release/SCIPOptSuite-5.0.1-Linux.deb' -O
+  - sudo apt-get install libblas-common libblas3 libgfortran3 liblapack3 -y
+  - sudo dpkg -i SCIPOptSuite-5.0.1-Linux.deb
 
 script:
   - python --version
   - python assignment02-a.py
+  - python assignment02-c.py
 
 matrix:
   include:
@@ -23,8 +18,6 @@ matrix:
     python: 3.5
   - os: linux
     python: 3.6
-  - os: linux
-    python: pypy3
   - os: osx
     osx_image: xcode9.3
     language: generic
