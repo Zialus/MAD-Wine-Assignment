@@ -1,0 +1,20 @@
+environment:
+  SCIPOPTDIR: C:\scipoptdir
+  matrix:
+  - PYTHON: C:\Python35-x64
+  - PYTHON: C:\Python36-x64
+
+init:
+  - ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  - python --version
+
+install:
+  - ps: wget http://scip.zib.de/download/release/SCIPOptSuite-5.0.1-win64-VS15.exe -outfile scipopt-installer.exe
+  - scipopt-installer.exe /S /D=%SCIPOPTDIR%
+  - set PATH=%SCIPOPTDIR%\bin;%PYTHON%;%PATH%
+
+test_script:
+  - pip install -r requirements.txt
+  - python assignment02-a.py
+  - python assignment02-c.py
