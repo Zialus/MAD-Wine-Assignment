@@ -3,9 +3,17 @@ dist: xenial
 sudo: true
 
 before_install:
-  - curl --referer 'http://scip.zib.de/download.php?fname=SCIPOptSuite-5.0.1-Linux.deb' 'http://scip.zib.de/download/release/SCIPOptSuite-5.0.1-Linux.deb' -O
-  - sudo apt-get install libblas-common libblas3 libgfortran3 liblapack3 -y
-  - sudo dpkg -i SCIPOptSuite-5.0.1-Linux.deb
+  - export VERSION=5.0.1
+  - pushd .
+  - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
+  - tar xf scipoptsuite-$VERSION.tgz
+  - cd scipoptsuite-$VERSION
+  - mkdir build && cd build
+  - cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/travis/.local/ ..
+  - make -j4
+  - make install
+  - popd
+  - rm -rf scipoptsuite-$VERSION
 
 script:
   - python --version
@@ -22,15 +30,17 @@ matrix:
     osx_image: xcode9.3
     language: generic
     before_install:
+      - export VERSION=5.0.1
       - pushd .
-      - curl --referer 'http://scip.zib.de/download.php?fname=scipoptsuite-5.0.1.tgz' 'http://scip.zib.de/download/release/scipoptsuite-5.0.1.tgz' --output 'scipoptsuite-5.0.1.tgz'
-      - tar xzf scipoptsuite-5.0.1.tgz
-      - cd scipoptsuite-5.0.1
+      - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
+      - tar xf scipoptsuite-$VERSION.tgz
+      - cd scipoptsuite-$VERSION
       - mkdir build && cd build
       - cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release ..
-      - make
+      - make -j2
       - make install
       - popd
+      - rm -rf scipoptsuite-$VERSION
       - brew update
       - brew upgrade python3
       - virtualenv env -p python3
