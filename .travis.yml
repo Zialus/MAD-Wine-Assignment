@@ -3,13 +3,14 @@ dist: xenial
 sudo: true
 
 before_install:
+  - export SCIPOPTDIR=~/scipoptdir
   - export VERSION=5.0.1
   - pushd .
   - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
   - tar xf scipoptsuite-$VERSION.tgz
   - cd scipoptsuite-$VERSION
   - mkdir build && cd build
-  - cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/travis/.local/ ..
+  - cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR ..
   - make -j4
   - make install
   - popd

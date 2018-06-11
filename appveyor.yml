@@ -14,7 +14,7 @@ init:
 install:
   - ps: wget http://scip.zib.de/download/release/SCIPOptSuite-5.0.1-win64-VS15.exe -outfile scipopt-installer.exe
   - scipopt-installer.exe /S /D=%SCIPOPTDIR%
-  - set PATH=%SCIPOPTDIR%\bin;%PYTHON%;%PATH%
+  - set PATH=%SCIPOPTDIR%\bin;%PATH%
 
 test_script:
   - pip install -r requirements.txt
