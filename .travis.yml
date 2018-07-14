@@ -4,7 +4,7 @@ sudo: true
 
 before_install:
   - export SCIPOPTDIR=~/scipoptdir
-  - export VERSION=5.0.1
+  - export VERSION=6.0.0
   - pushd .
   - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
   - tar xf scipoptsuite-$VERSION.tgz
@@ -27,11 +27,13 @@ matrix:
     python: 3.5
   - os: linux
     python: 3.6
+  - os: linux
+    python: 3.7
   - os: osx
     osx_image: xcode9.3
     language: generic
     before_install:
-      - export VERSION=5.0.1
+      - export VERSION=6.0.0
       - pushd .
       - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
       - tar xf scipoptsuite-$VERSION.tgz
