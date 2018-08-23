@@ -1,13 +1,13 @@
-language: python
+os: linux
 dist: xenial
 sudo: true
-os: linux
+
+language: python
 
 python:
   - 3.5
   - 3.6
   - 3.7
-  - pypy2.7
   - pypy3.5
 
 before_install:
@@ -18,8 +18,8 @@ before_install:
   - tar xf scipoptsuite-$VERSION.tgz
   - cd scipoptsuite-$VERSION
   - mkdir build && cd build
-  - cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR ..
-  - make -j4
+  - cmake -DCMAKE_INSTALL_PREFIX=$SCIPOPTDIR ..
+  - make -j2
   - make install
   - popd
   - rm -rf scipoptsuite-$VERSION
@@ -33,7 +33,7 @@ matrix:
   - os: osx
     osx_image: xcode10
     language: generic # python is not well supported on OSX builds yet
-    python: 3.7
+    python: 3.7 # python is not well supported on OSX builds yet
     before_install:
       - export VERSION=6.0.0
       - pushd .
@@ -41,16 +41,16 @@ matrix:
       - tar xf scipoptsuite-$VERSION.tgz
       - cd scipoptsuite-$VERSION
       - mkdir build && cd build
-      - cmake -DSHARED=on -DCMAKE_BUILD_TYPE=Release ..
+      - cmake ..
       - make -j2
       - make install
       - popd
       - rm -rf scipoptsuite-$VERSION
-    install:  # this is done by default in the linux build
-#       - brew update
-#       - brew upgrade python3
-#       - virtualenv env -p python3
-#       - source env/bin/activate
+    install: # this would be done by default if we could pick python as the config language
+      - pip3 install virtualenv
+      - virtualenv env -p python3
+      - source env/bin/activate
       - python --version
       - pip --version
       - pip install -r requirements.txt
+
