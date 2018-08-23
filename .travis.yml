@@ -7,8 +7,8 @@ python:
   - 3.5
   - 3.6
   - 3.7
-  - pypy
-  - pyp3
+  - pypy2.7
+  - pypy3.5
 
 before_install:
   - export SCIPOPTDIR=~/scipoptdir
@@ -47,9 +47,10 @@ matrix:
       - popd
       - rm -rf scipoptsuite-$VERSION
     install:  # this is done by default in the linux build
-      - brew update
-      - brew upgrade python3
-      - virtualenv env -p python3
-      - source env/bin/activate
+#       - brew update
+#       - brew upgrade python3
+#       - virtualenv env -p python3
+#       - source env/bin/activate
       - python --version
+      - pip --version
       - pip install -r requirements.txt
