@@ -1,6 +1,14 @@
 language: python
 dist: xenial
 sudo: true
+os: linux
+
+python:
+  - 3.5
+  - 3.6
+  - 3.7
+  - pypy
+  - pyp3
 
 before_install:
   - export SCIPOPTDIR=~/scipoptdir
@@ -17,21 +25,15 @@ before_install:
   - rm -rf scipoptsuite-$VERSION
 
 script:
-  - python --version
   - python assignment02-a.py
   - python assignment02-c.py
 
 matrix:
   include:
-  - os: linux
-    python: 3.5
-  - os: linux
-    python: 3.6
-  - os: linux
-    python: 3.7
   - os: osx
-    osx_image: xcode9.3
-    language: generic
+    osx_image: xcode10
+    language: generic # python is not well supported on OSX builds yet
+    python: 3.7
     before_install:
       - export VERSION=6.0.0
       - pushd .
@@ -44,8 +46,10 @@ matrix:
       - make install
       - popd
       - rm -rf scipoptsuite-$VERSION
+    install:  # this is done by default in the linux build
       - brew update
       - brew upgrade python3
       - virtualenv env -p python3
       - source env/bin/activate
+      - python --version
       - pip install -r requirements.txt
