@@ -44,7 +44,7 @@ for:
   - pip --version
   install:
   - wget http://scip.zib.de/download/release/SCIPOptSuite-6.0.0-Linux.deb -O scipopt-installer.deb
-  - sudo apt-get install libblas-common libblas3 libgfortran3 liblapack3 -y
+  - sudo apt-get install libblas3 libgfortran3 liblapack3 -y
   - sudo dpkg -i scipopt-installer.deb
   before_build:
   - pip3 install virtualenv
