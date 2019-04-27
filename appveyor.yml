@@ -17,7 +17,7 @@ init:
 
 install:
   - SET SCIPOPTDIR=C:\scipoptdir
-  - ps: wget http://scip.zib.de/download/release/SCIPOptSuite-6.0.0-win64-VS15.exe -O scipopt-installer.exe
+  - ps: wget http://scip.zib.de/download/release/SCIPOptSuite-6.0.1-win64-VS15.exe -O scipopt-installer.exe
   - scipopt-installer.exe /S /D=%SCIPOPTDIR%
   - set PATH=%SCIPOPTDIR%\bin;%PATH%
 
@@ -43,8 +43,8 @@ for:
   - python --version
   - pip --version
   install:
-  - wget http://scip.zib.de/download/release/SCIPOptSuite-6.0.0-Linux.deb -O scipopt-installer.deb
-  - sudo apt-get install libblas3 libgfortran3 liblapack3 -y
+  - wget http://scip.zib.de/download/release/SCIPOptSuite-6.0.1-Linux.deb -O scipopt-installer.deb
+  - sudo apt-get install libblas3 libgfortran3 liblapack3 libgsl2 -y
   - sudo dpkg -i scipopt-installer.deb
   before_build:
   - pip3 install virtualenv

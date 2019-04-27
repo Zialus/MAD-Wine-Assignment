@@ -1,18 +1,17 @@
 os: linux
 dist: xenial
-sudo: true
 
 language: python
 
 python:
-  - 3.5
-  - 3.6
-  - 3.7
-  - pypy3.5
+  - '3.5'
+  - '3.6'
+  - '3.7'
+  - 'pypy3'
 
 before_install:
   - export SCIPOPTDIR=~/scipoptdir
-  - export VERSION=6.0.0
+  - export VERSION=6.0.1
   - pushd .
   - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
   - tar xf scipoptsuite-$VERSION.tgz
@@ -31,21 +30,9 @@ script:
 matrix:
   include:
   - os: osx
-    osx_image: xcode10
+    osx_image: xcode10.2
     language: generic # python is not well supported on OSX builds yet
     python: 3.7 # python is not well supported on OSX builds yet
-    before_install:
-      - export VERSION=6.0.0
-      - pushd .
-      - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
-      - tar xf scipoptsuite-$VERSION.tgz
-      - cd scipoptsuite-$VERSION
-      - mkdir build && cd build
-      - cmake ..
-      - make -j2
-      - make install
-      - popd
-      - rm -rf scipoptsuite-$VERSION
     install: # this would be done by default if we could pick python as the config language
       - pip3 install virtualenv
       - virtualenv env -p python3
@@ -53,3 +40,4 @@ matrix:
       - python --version
       - pip --version
       - pip install -r requirements.txt
+      - export DYLD_LIBRARY_PATH=$SCIPOPTDIR/lib:$DYLD_LIBRARY_PATH # this seems to be needed
