@@ -1,5 +1,5 @@
 os: linux
-dist: xenial
+dist: bionic
 
 language: python
 
@@ -7,11 +7,12 @@ python:
   - '3.5'
   - '3.6'
   - '3.7'
+  - '3.8'
   - 'pypy3'
 
 before_install:
   - export SCIPOPTDIR=~/scipoptdir
-  - export VERSION=6.0.1
+  - export VERSION=7.0.0
   - pushd .
   - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
   - tar xf scipoptsuite-$VERSION.tgz
@@ -27,12 +28,11 @@ script:
   - python assignment02-a.py
   - python assignment02-c.py
 
-matrix:
+jobs:
   include:
   - os: osx
-    osx_image: xcode10.2
-    language: generic # python is not well supported on OSX builds yet
-    python: 3.7 # python is not well supported on OSX builds yet
+    osx_image: xcode11.3
+    language: generic # python is not supported on OSX builds yet
     install: # this would be done by default if we could pick python as the config language
       - pip3 install virtualenv
       - virtualenv env -p python3
