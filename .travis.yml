@@ -4,15 +4,15 @@ dist: bionic
 language: python
 
 python:
-  - '3.5'
   - '3.6'
   - '3.7'
   - '3.8'
+  - '3.9'
   - 'pypy3'
 
 before_install:
   - export SCIPOPTDIR=~/scipoptdir
-  - export VERSION=7.0.0
+  - export VERSION=7.0.1
   - pushd .
   - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
   - tar xf scipoptsuite-$VERSION.tgz
