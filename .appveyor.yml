@@ -1,21 +1,21 @@
 environment:
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      PYTHON: C:\Python36-x64
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       PYTHON: C:\Python37-x64
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       PYTHON: C:\Python38-x64
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       PYTHON: C:\Python39-x64
-    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
-      PYTHON: '3.6'
-    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      PYTHON: C:\Python310-x64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
       PYTHON: '3.7'
-    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
       PYTHON: '3.8'
-    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
       PYTHON: '3.9'
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
+      PYTHON: '3.10'
 
 stack: python %PYTHON% # Sets the Python version on Linux
 
@@ -26,7 +26,7 @@ init:
 
 install:
   - SET SCIPOPTDIR=C:\scipoptdir
-  - ps: wget http://scip.zib.de/download/release/SCIPOptSuite-8.0.0-win64-VS15.exe -O scipopt-installer.exe
+  - ps: wget https://scip.zib.de/download/release/SCIPOptSuite-8.0.0-win64-VS15.exe -O scipopt-installer.exe
   - scipopt-installer.exe /S /D=%SCIPOPTDIR%
   - set PATH=%SCIPOPTDIR%\bin;%PATH%
 
@@ -46,13 +46,13 @@ for:
 -
   matrix:
     only:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
 
   init:
   - python --version
   - pip --version
   install:
-  - wget http://scip.zib.de/download/release/SCIPOptSuite-8.0.0-Linux.deb -O scipopt-installer.deb
+  - wget https://scip.zib.de/download/release/SCIPOptSuite-8.0.0-Linux-ubuntu.deb -O scipopt-installer.deb
   - sudo apt install -y ./scipopt-installer.deb
   before_build:
   - pip3 install virtualenv
