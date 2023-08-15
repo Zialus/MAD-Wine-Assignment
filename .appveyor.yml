@@ -53,7 +53,7 @@ for:
   - pip --version
   install:
   - wget https://scip.zib.de/download/release/SCIPOptSuite-8.0.0-Linux-ubuntu.deb -O scipopt-installer.deb
-  - sudo apt install -y ./scipopt-installer.deb
+  - sudo apt install -yq ./scipopt-installer.deb
   before_build:
   - pip3 install virtualenv
   - virtualenv env -p python3

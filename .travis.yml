@@ -12,7 +12,7 @@ python:
 
 before_install:
   - export SCIPOPTDIR=~/scipoptdir
-  - export VERSION=7.0.1
+  - export VERSION=8.0.4
   - pushd .
   - wget http://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
   - tar xf scipoptsuite-$VERSION.tgz

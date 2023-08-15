@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        python-version: [ "3.8", "3.9", "3.10", "pypy-3.9" ]
+        python-version: [ "3.10", "3.11", "3.12", "pypy-3.10" ]
 
     steps:
       - name: Git Checkout
@@ -43,7 +43,7 @@ jobs:
       - name: Install SCIP
         run: |
           export SCIPOPTDIR=~/scipoptdir
-          export VERSION=8.0.0
+          export VERSION=8.0.4
           pushd .
           wget https://scip.zib.de/download/release/scipoptsuite-$VERSION.tgz
           tar xf scipoptsuite-$VERSION.tgz
